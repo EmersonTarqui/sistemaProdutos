@@ -2,15 +2,6 @@ import '../state/darkMode.js';
 import { createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import { auth } from "../config/firebaseConfig.js";
 
- authService.verificarAutenticacao((user) => {
-    if (user) {
-      showAlert("Você já está logado! Redirecionando...", "success");
-      setTimeout(() => {
-        window.location.href = "index.html";
-      }, 2000);
-    }
-  });
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("cadastroForm");
   const alertContainer = document.getElementById("alertContainer");
@@ -24,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ${message}
       </div>
     `;
-    
+
     if (type === "success") {
       setTimeout(() => {
         alertContainer.innerHTML = '';
@@ -32,12 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  //validação
   const validarCampo = (input, condicao, mensagem) => {
     const feedback = input.nextElementSibling;
     feedback.textContent = condicao ? "" : mensagem;
     input.classList.toggle("is-invalid", !condicao);
-    input.classList.toggle("is-valid", condicao); 
+    input.classList.toggle("is-valid", condicao);
     return condicao;
   };
 
@@ -51,16 +41,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   confirmarSenhaInput.addEventListener("input", () => validarCampo(confirmarSenhaInput, senhaInput.value === confirmarSenhaInput.value, "Senhas não conferem"));
 
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      showAlert("Você já está logado! Redirecionando para a página inicial...", "success");
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 2000);
+    }
+  });
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const email = emailInput.value.trim();
     const senha = senhaInput.value;
     const confirmarSenha = confirmarSenhaInput.value;
-    
+
     const emailValido = validarCampo(emailInput, email.includes("@"), "Email inválido");
     const senhaValida = validarCampo(senhaInput, senha.length >= 8, "Mínimo 8 caracteres");
     const senhasIguais = validarCampo(confirmarSenhaInput, senha === confirmarSenha, "Senhas não conferem");
-    
+
     if (!emailValido || !senhaValida || !senhasIguais) {
       showAlert("Por favor, corrija os erros no formulário antes de continuar.");
       return;
@@ -69,9 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.classList.add("is-loading");
 
     createUserWithEmailAndPassword(auth, email, senha)
-      .then(() => {
-        return signOut(auth);
-      })
+      .then(() => signOut(auth))
       .then(() => {
         showAlert("Cadastro realizado com sucesso! Redirecionando para o login...", "success");
         setTimeout(() => window.location.href = "login.html", 2000);
