@@ -17,7 +17,7 @@
     color: var(--light-color);
     background-color: var(--primary-color);
     border-color: var(--dark-color);
-    margin: 10px;
+    margin: 12px;
 }
 
 .btn-danger {
