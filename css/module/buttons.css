@@ -45,4 +45,10 @@
 
 .btn-outline-light {
     color: #4242428f;
+    border-color: var(--dark-color);
+}
+
+.btn-outline-light:hover {
+    background-color: rgba(128, 128, 128, 0.515);
+    border-color: var(--dark-color);
 }
