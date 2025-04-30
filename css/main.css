@@ -92,6 +92,18 @@
     margin-bottom: 3rem;
 }
 
+body {
+    font-family: var(--font-family, Arial, sans-serif);
+    line-height: 1.6;
+    color: #333;
+    background-color: var(--body-bg);
+}
+
+html.dark-mode body {
+    background-color: #121212;
+    color: #ffffff;
+}
+
 
 .dark-mode body {
     color: #eee;
