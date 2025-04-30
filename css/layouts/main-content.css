@@ -1,0 +1,16 @@
+.main-content {
+    padding: 1.5rem 0;
+    min-height: calc(100vh - 130px);
+}
+
+@media (max-width: 768px) {
+    .link-cadastro, .link-login {
+      display: block;
+      margin-top: 5px; 
+      
+      
+    }
+  }
+  
+
+ 

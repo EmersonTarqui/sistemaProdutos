@@ -1,0 +1,35 @@
+.nav {
+    display: grid; 
+    grid-template-columns: auto auto; 
+    gap: 10px; 
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+
+.nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: var(--border-radius);;
+    transition: all 0.25s ease-in-out;
+}
+
+.nav-link:hover, .nav-link:focus { 
+    text-decoration: none;
+    color: var(--dark-color);
+}
+
+@media (max-width: 768px) {
+    .nav {
+        display: block;
+        text-align: center;
+    }
+    
+    .nav-link {
+        display: block;
+        width: 70%;
+        margin: 0 auto;
+    }
+}
