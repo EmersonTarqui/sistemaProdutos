@@ -16,6 +16,11 @@
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.form-control::placeholder {
+    opacity: 0.9;
+    font-style: italic;
+}
+
 .form-control:focus {
     color: #495057;
     background-color: #fff;
