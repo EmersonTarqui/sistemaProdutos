@@ -2,6 +2,14 @@ import '../state/darkMode.js';
 import { createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import { auth } from "../config/firebaseConfig.js";
 
+ authService.verificarAutenticacao((user) => {
+    if (user) {
+      showAlert("Você já está logado! Redirecionando...", "success");
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 2000);
+    }
+  });
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("cadastroForm");
